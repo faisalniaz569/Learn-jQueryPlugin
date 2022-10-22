@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smooth Accordion menu demo</title>
+    <link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <h1>Smooth Accordion Dropdown Menu Demo</h1>
+    
+    <ul id="accordion" class="accordion">
+        <li>
+            <div class="link"><i class="fa fa-database"></i>Web Design<i class="fa fa-chevron-down"></i></div>
+            <ul class="submenu">
+                <li><a href="#">Photoshop</a></li>
+                <li><a href="#">HTML</a></li>
+                <li><a href="#">CSS</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="link"><i class="fa fa-code"></i>Coding<i class="fa fa-chevron-down"></i></div>
+            <ul class="submenu">
+                <li><a href="#">Javascript</a></li>
+                <li><a href="#">jQuery</a></li>
+                <li><a href="#">Ruby</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="link"><i class="fa fa-mobile"></i>Devices<i class="fa fa-chevron-down"></i></div>
+            <ul class="submenu">
+                <li><a href="#">Tablet</a></li>
+                <li><a href="#">Mobile</a></li>
+                <li><a href="#">Desktop</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="link"><i class="fa fa-globe"></i>Global<i class="fa fa-chevron-down"></i></div>
+            <ul class="submenu">
+                <li><a href="#">Google</a></li>
+                <li><a href="#">Bing</a></li>
+                <li><a href="#">Yahoo</a></li>
+            </ul>
+        </li>
+    </ul>
+    
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> 
+<script>
+$(function() {
+	var Accordion = function(el, multiple) {
+		this.el = el || {};
+		this.multiple = multiple || false;
+
+		// Variables privadas
+		var links = this.el.find('.link');
+		// Evento
+		links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+	}
+
+	Accordion.prototype.dropdown = function(e) {
+		var $el = e.data.el;
+			$this = $(this),
+			$next = $this.next();
+
+		$next.slideToggle();
+		$this.parent().toggleClass('open');
+
+		if (!e.data.multiple) {
+			$el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+		};
+	}	
+
+	var accordion = new Accordion($('#accordion'), false);
+});
+</script>
+</body>
+</html>
